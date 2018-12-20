@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.UUID;
 
 public class Task {
 
@@ -8,6 +9,7 @@ public class Task {
     private int term; // срок выполнения
     private Priority priority;
     private State state;
+    private final String uid;
 
 
     Task (String name, String author, String executor, int term, String priority) {
@@ -17,13 +19,8 @@ public class Task {
         this.term = term;
         this.priority = Priority.valueOf(priority);
         state = State.OPEN;
+        uid = UUID.fromString(name).toString();
     }
-
-
-
-//    public Task newTask () {
-//
-//    }
 
     @Override
     public String toString() {
@@ -35,6 +32,14 @@ public class Task {
                 ", priority=" + priority +
                 ", state=" + state +
                 '}';
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setExecutor(String executor) {
@@ -70,10 +75,10 @@ public class Task {
     }
 
     enum Priority {
-        idle, urgent, fatal
+        idle, urgent, fatal, IDLE, URGENT, FATAL
     }
 
     enum State {
-        OPEN, WORKING, FINISHED, CLOSED
+        OPEN, WORKING, FINISHED, CLOSED, open, working, finished, closed
     }
 }

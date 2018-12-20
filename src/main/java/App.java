@@ -19,10 +19,12 @@ public class App {
                 break;
             case 2:
                 tasksStorage.viewAllTasks();
+                App.Controller();
                 break;
             case 3:
                 tasksStorage.viewAllTasks();
                 tasksStorage.modifyTaskExecutor(taskName.nextLine());
+                App.Controller();
                 break;
             case 4:
                 tasksStorage.viewAllTasks();
@@ -37,6 +39,17 @@ public class App {
             case 6:
                 System.out.println("Bye..");
                 System.exit(0);
+            case 7:
+                TasksStorage.TestFill();
+                tasksStorage.viewAllTasks();
+                App.Controller();
+                break;
         }
     }
+
+    public static void Test1() {
+
+    }
+
+
 }

@@ -1,36 +1,52 @@
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class TasksStorage {
 
     private static Map<String, Task> tasks = new HashMap ();
 
+    public static void TestFill () {
+       Task task1 = new Task("repair","Ivan", "Serg", 3, "idle");
+       Task task2 = new Task("install", "Fred", "Fil", 2, "idle");
+       Task task3 = new Task("clean", "James", "Dan", 1, "FATAL");
+       tasks.put(task1.getName(), task1);
+       tasks.put(task2.getName(), task2);
+       tasks.put(task3.getName(), task3);
+    }
+
     public void addTask () {
-        Scanner sc = new Scanner(System.in);
+        final Scanner sc = new Scanner(System.in);
         System.out.print("Enter new task descriprion: " );
-        String description = sc.nextLine();
+        final String description = sc.nextLine();
         System.out.print("Enter new task author: ");
-        String author = sc.nextLine();
+        final String author = sc.nextLine();
         System.out.print("Set executor of task: ");
-        String executor = sc.nextLine();
+        final String executor = sc.nextLine();
         System.out.print("Set priority of task (IDLE/URGENT/FATAL): ");
-        String priority = sc.nextLine();
+        final String priority = sc.nextLine();
         System.out.print("Enter hours required to complete task: ");
-        int term = sc.nextInt();
-        tasks.put(description, new Task(description, author, executor, term, priority));
+        final int term = sc.nextInt();
+        Task task = new Task(description, author, executor, term, priority);
+        tasks.put(task.getUid(),task);
         App.Controller();
     }
 
-    public Task getTask (String name) {
-        return (Task) tasks.get(name);
+    public Task getTask (String uid) {
+        return (Task) tasks.get(uid);
     }
 
-    public void viewAllTasks () {
-        for (String key : tasks.keySet()) {
-            System.out.println(tasks.get(key).toString());
+    public void viewAllTasks () { //реализовать вывод по 10 записей
+        if (tasks.isEmpty()) System.out.println("No active tasks.");
+        else {//if (tasks.size() <= 10) {
+            int id = 0;
+            for (String key : tasks.keySet())
+                System.out.println(id++ + " " + tasks.get(key).toString());
+//        } else {
+//            for (int i = 1; i < 11; i++) {
+//
+//            }
         }
-        
+
+        System.out.println();
     }
 
     public void modifyTaskChoice(String name) {
@@ -61,7 +77,7 @@ public class TasksStorage {
 
     public void modifyTaskExecutor(String name) {
         Task changer = tasks.get(name);
-        System.out.print("Changing Executor, enter new name: ");
+        System.out.print("Enter name of task to change executor: ");
         Scanner sc = new Scanner(System.in);
         changer.setExecutor(sc.nextLine());
         tasks.replace(name,changer);
@@ -70,7 +86,7 @@ public class TasksStorage {
 
     public void modifyTaskState (String name) {
         Task changer = tasks.get(name);
-        System.out.print("Changing task state, enter new state: ");
+        System.out.print("Enter name of task to change state: ");
         Scanner sc = new Scanner(System.in);
         changer.setState(sc.nextLine());
         tasks.replace(name,changer);
@@ -79,7 +95,7 @@ public class TasksStorage {
 
     public void modifyTaskPriority(String name) {
         Task changer = tasks.get(name);
-        System.out.print("Changing task priority, enter new option: ");
+        System.out.print("Enter name of task to change priority: ");
         Scanner sc = new Scanner(System.in);
         changer.setPriority(sc.nextLine());
         tasks.replace(name,changer);
@@ -88,11 +104,15 @@ public class TasksStorage {
 
     public void modifyTaskTime(String name) {
         Task changer = tasks.get(name);
-        System.out.print("Add time to task term, add required hours: ");
+        System.out.print("Enter name of task to add required hours: ");
         Scanner sc = new Scanner(System.in);
         changer.addTerm(sc.nextInt());
         tasks.replace(name,changer);
         App.Controller();
+    }
+
+    public void deleteTask (String uid) {
+
     }
 }
 
