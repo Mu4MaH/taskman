@@ -1,3 +1,5 @@
+package entities;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,7 +11,7 @@ public class Executor {
     private String uid;
 
     Executor() {
-        this.name = "";
+        this.name = "empty";
         uid = null;
     }
 
@@ -51,6 +53,10 @@ public class Executor {
 
     public void replaceTask (String oldTaskUid, Task newTask) {
         taskList.replace(oldTaskUid, newTask);
+    }
+
+    public String getUid () {
+        return this.uid;
     }
 
 

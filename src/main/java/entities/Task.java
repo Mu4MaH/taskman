@@ -1,4 +1,5 @@
-import java.util.Scanner;
+package entities;
+
 import java.util.UUID;
 
 public class Task {
@@ -13,8 +14,19 @@ public class Task {
     private Executor executor;
     private int id = 0;
 
+    Task(){
+        this.name = "empty";
+        this.author = "empty";
+        this.term = 0;
+        this.priority = Priority.valueOf("IDLE");
+        state = State.OPEN;
+        uid = UUID.fromString(name).toString();
+        this.executor = null;
+        this.project = null;
+    }
 
-    Task (String name, String author, int term, String priority) {
+
+    public Task(String name, String author, int term, String priority) {
         this.name = name;
         this.author = author;
         this.term = term;
@@ -38,14 +50,14 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "entities.Task{" +
                 "name = '" + name + '\'' +
                 ", author = '" + author + '\'' +
                 ", executor = '" + executor.getName() + '\'' +
                 ", term = " + term +
                 ", priority = " + priority +
                 ", state = " + state +
-                ", Project = " + project.getName() +
+                ", entities.Project = " + project.getName() +
                 '}';
     }
 
