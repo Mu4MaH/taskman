@@ -5,32 +5,47 @@ public class Task {
 
     private final String name; //название таска
     private final String author; //автор
-    private String executor; // исполнитель
     private int term; // срок выполнения
     private Priority priority;
     private State state;
     private final String uid;
+    private Project project;
+    private Executor executor;
+    private int id = 0;
 
 
-    Task (String name, String author, String executor, int term, String priority) {
+    Task (String name, String author, int term, String priority) {
         this.name = name;
         this.author = author;
-        this.executor = executor;
         this.term = term;
         this.priority = Priority.valueOf(priority);
         state = State.OPEN;
         uid = UUID.fromString(name).toString();
+        this.executor = null;
+        this.project = null;
+    }
+
+    Task (String name, String author, Executor executor, Project project, int term, String priority) {
+        this.name = name;
+        this.author = author;
+        this.term = term;
+        this.priority = Priority.valueOf(priority);
+        state = State.OPEN;
+        uid = UUID.fromString(name).toString();
+        this.executor = null;
+        this.project = null;
     }
 
     @Override
     public String toString() {
         return "Task{" +
-                "name='" + name + '\'' +
-                ", author='" + author + '\'' +
-                ", executor='" + executor + '\'' +
-                ", term=" + term +
-                ", priority=" + priority +
-                ", state=" + state +
+                "name = '" + name + '\'' +
+                ", author = '" + author + '\'' +
+                ", executor = '" + executor.getName() + '\'' +
+                ", term = " + term +
+                ", priority = " + priority +
+                ", state = " + state +
+                ", Project = " + project.getName() +
                 '}';
     }
 
@@ -42,12 +57,12 @@ public class Task {
         return name;
     }
 
-    public void setExecutor(String executor) {
+    public void setExecutor(Executor executor) {
         this.executor = executor;
     }
 
     public String getExecutor() {
-        return executor;
+        return executor.toString();
     }
 
     public State getState() {
@@ -72,6 +87,14 @@ public class Task {
 
     public void setPriority(String priority) {
         this.priority = Priority.valueOf(priority.toUpperCase());
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return this.id;
     }
 
     enum Priority {

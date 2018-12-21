@@ -5,9 +5,9 @@ public class TasksStorage {
     private static Map<String, Task> tasks = new HashMap ();
 
     public static void TestFill () {
-       Task task1 = new Task("repair","Ivan", "Serg", 3, "idle");
-       Task task2 = new Task("install", "Fred", "Fil", 2, "idle");
-       Task task3 = new Task("clean", "James", "Dan", 1, "FATAL");
+       Task task1 = new Task("repair","Ivan", 3, "idle");
+       Task task2 = new Task("install", "Fred",  2, "idle");
+       Task task3 = new Task("clean", "James", 1, "FATAL");
        tasks.put(task1.getName(), task1);
        tasks.put(task2.getName(), task2);
        tasks.put(task3.getName(), task3);
@@ -25,7 +25,7 @@ public class TasksStorage {
         final String priority = sc.nextLine();
         System.out.print("Enter hours required to complete task: ");
         final int term = sc.nextInt();
-        Task task = new Task(description, author, executor, term, priority);
+        Task task = new Task(description, author, term, priority);
         tasks.put(task.getUid(),task);
         App.Controller();
     }
@@ -57,7 +57,7 @@ public class TasksStorage {
         switch (sc.nextInt()) {
             case 1:
                 System.out.print("Set new executor: ");
-                changer.setExecutor(toChange.nextLine());
+                //changer.setExecutor(toChange.nextLine());
                 break;
             case 2:
                 System.out.print("Add required hours to complete task");
@@ -79,7 +79,7 @@ public class TasksStorage {
         Task changer = tasks.get(name);
         System.out.print("Enter name of task to change executor: ");
         Scanner sc = new Scanner(System.in);
-        changer.setExecutor(sc.nextLine());
+        //changer.setExecutor(sc.nextLine());
         tasks.replace(name,changer);
         App.Controller();
     }
