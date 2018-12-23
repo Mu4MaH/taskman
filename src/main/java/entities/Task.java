@@ -1,28 +1,34 @@
 package entities;
 
+import dao.TaskStorage;
+
+import java.util.Scanner;
 import java.util.UUID;
 
 public class Task {
 
-    private final String name; //название таска
+    private final String uid = UUID.randomUUID().toString();;
+    private String name; //название таска
+    private String description;
     private final String author; //автор
     private int term; // срок выполнения
     private Priority priority;
     private State state;
-    private final String uid;
-    private Project project;
-    private Executor executor;
     private int id = 0;
 
-    Task(){
-        this.name = "empty";
-        this.author = "empty";
-        this.term = 0;
-        this.priority = Priority.valueOf("IDLE");
-        state = State.OPEN;
-        uid = UUID.fromString(name).toString();
-        this.executor = null;
-        this.project = null;
+    public Task(){
+        final Scanner sc = new Scanner(System.in);
+        System.out.print("Enter new task descriprion: " );
+        this.name = sc.nextLine();
+        System.out.print("Enter new task author: ");
+        this.author = sc.nextLine();
+        System.out.print("Set executor of task: ");
+        final String executor = sc.nextLine();
+        System.out.print("Set priority of task (IDLE/URGENT/FATAL): ");
+        this.priority = Priority.valueOf(sc.nextLine());
+        System.out.print("Enter hours required to complete task: ");
+        this.term = Integer.parseInt(sc.nextLine());
+        this.state = State.OPEN;
     }
 
 
@@ -31,10 +37,7 @@ public class Task {
         this.author = author;
         this.term = term;
         this.priority = Priority.valueOf(priority);
-        state = State.OPEN;
-        uid = UUID.fromString(name).toString();
-        this.executor = null;
-        this.project = null;
+        this.state = State.OPEN;
     }
 
     Task (String name, String author, Executor executor, Project project, int term, String priority) {
@@ -43,9 +46,6 @@ public class Task {
         this.term = term;
         this.priority = Priority.valueOf(priority);
         state = State.OPEN;
-        uid = UUID.fromString(name).toString();
-        this.executor = null;
-        this.project = null;
     }
 
     @Override
@@ -53,11 +53,11 @@ public class Task {
         return "entities.Task{" +
                 "name = '" + name + '\'' +
                 ", author = '" + author + '\'' +
-                ", executor = '" + executor.getName() + '\'' +
+// TODO: get executors list, who are on this task               ", executor = '" + TaskStorage.tasks.get() + '\'' +
                 ", term = " + term +
                 ", priority = " + priority +
                 ", state = " + state +
-                ", entities.Project = " + project.getName() +
+                //TODO: get project which this task is assigned at    ", entities.Project = " + project.getName() +
                 '}';
     }
 
@@ -67,14 +67,6 @@ public class Task {
 
     public String getName() {
         return name;
-    }
-
-    public void setExecutor(Executor executor) {
-        this.executor = executor;
-    }
-
-    public String getExecutor() {
-        return executor.toString();
     }
 
     public State getState() {

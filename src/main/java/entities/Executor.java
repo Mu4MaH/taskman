@@ -5,19 +5,19 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Executor {
+    private final String uid;
     private String name;
     private Map<String, Task> taskList = new HashMap<>();
     private boolean named = false;
-    private String uid;
 
     Executor() {
         this.name = "empty";
-        uid = null;
+        uid =  UUID.randomUUID().toString();
     }
 
     Executor(String name){
         this.name = name;
-        uid =  UUID.fromString(name).toString();
+        uid =  UUID.randomUUID().toString();
         named = true;
     }
 
@@ -30,19 +30,10 @@ public class Executor {
         if (named) System.out.println("You are not allowed to change name");
         else {
             this.name = name;
-            uid =  UUID.fromString(name).toString();
         }
     }
 
-    public Task getTask(String taskUid) {
-        return taskList.get(taskUid);
-    }
-
-    public void addTask (Task task) {
-        taskList.put(task.getUid(),task);
-    }
-
-    public void viewAllTasks () {
+    public void printAllTasks() {
         if (taskList.isEmpty()) System.out.println("No active tasks.");
         else {
             int id = 1;
@@ -51,14 +42,22 @@ public class Executor {
         }
     }
 
-    public void replaceTask (String oldTaskUid, Task newTask) {
-        taskList.replace(oldTaskUid, newTask);
-    }
-
     public String getUid () {
         return this.uid;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
+    public String getExecutorOfTask(Task task) {     //Checks if executor is at task and returns his name
+        if (taskList.containsKey(task.getUid()))     // Otherwise returns empty string
+            return this.name;
+        else return "";
+    }
 
+    public Map<String, Task> getTaskList() {
+        return taskList;
+    }
 }

@@ -1,7 +1,7 @@
 package dao;
 
 import entities.Task;
-import service.Controller;
+import View.View;
 
 import java.util.*;
 
@@ -19,20 +19,9 @@ public class TaskStorage {
     }
 
 public void addTask () {
-    final Scanner sc = new Scanner(System.in);
-    System.out.print("Enter new task descriprion: " );
-    final String description = sc.nextLine();
-    System.out.print("Enter new task author: ");
-    final String author = sc.nextLine();
-    System.out.print("Set executor of task: ");
-    final String executor = sc.nextLine();
-    System.out.print("Set priority of task (IDLE/URGENT/FATAL): ");
-    final String priority = sc.nextLine();
-    System.out.print("Enter hours required to complete task: ");
-    final int term = sc.nextInt();
-    Task task = new Task(description, author, term, priority);
+    Task task = new Task();
     tasks.put(task.getUid(),task);
-    Controller.Controller();
+    View.mainMenu();
 }
 
     public Task getTask (String uid) {
@@ -73,7 +62,7 @@ public void addTask () {
                 changer.setPriority(toChange.nextLine());
         }
         tasks.replace(name,changer);
-        Controller.Controller();
+        View.mainMenu();
     }
 
     public void modifyTaskExecutor(String name) {
@@ -81,7 +70,7 @@ public void addTask () {
         System.out.print("Enter name of task to change executor: ");
         final Scanner sc = new Scanner(System.in);
         tasks.replace(name, changer);
-        Controller.Controller();
+        View.mainMenu();
     }
 
     public void modifyTaskState (String name) {
@@ -90,7 +79,7 @@ public void addTask () {
         final Scanner sc = new Scanner(System.in);
         changer.setState(sc.nextLine());
         tasks.replace(name, changer);
-        Controller.Controller();
+        View.mainMenu();
     }
 
     public void modifyTaskPriority(String name) {
@@ -99,7 +88,7 @@ public void addTask () {
         final Scanner sc = new Scanner(System.in);
         changer.setPriority(sc.nextLine());
         tasks.replace(name, changer);
-        Controller.Controller();
+        View.mainMenu();
     }
 
     public void modifyTaskTime(String name) {
@@ -108,7 +97,7 @@ public void addTask () {
         final Scanner sc = new Scanner(System.in);
         changer.addTerm(sc.nextInt());
         tasks.replace(name, changer);
-        Controller.Controller();
+        View.mainMenu();
     }
 
     public void deleteTask (String uid) {

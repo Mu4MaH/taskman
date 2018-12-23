@@ -1,31 +1,31 @@
-package service;
+package View;
 
 import dao.TaskStorage;
-import service.TaskService;
 
 import java.util.Scanner;
 
-public class Controller {
+import static dao.TaskStorage.tasks;
 
-    static TaskStorage tasksStorage = new TaskStorage();
+public class View {
 
-    public static void Controller() {
+
+    public static void mainMenu() {
         Scanner sc = new Scanner(System.in);
         System.out.println("What would you like to do: \n 1)Create task \n 2)View tasklist \n 3)Change task executor \n" +
                 " 4)Change task priority \n 5)Change task time \n 6)Exit");
         Scanner taskName = new Scanner(System.in);
         switch (sc.nextInt()) {
             case 1:
-                tasksStorage.addTask();
+                tasks.();
                 break;
             case 2:
                 tasksStorage.viewAllTasks();
-                Controller();
+                mainMenu();
                 break;
             case 3:
                 tasksStorage.viewAllTasks();
                 tasksStorage.modifyTaskExecutor(taskName.nextLine());
-                Controller();
+                mainMenu();
                 break;
             case 4:
                 tasksStorage.viewAllTasks();
@@ -43,8 +43,10 @@ public class Controller {
             case 7:
                 TaskStorage.TestFill();
                 tasksStorage.viewAllTasks();
-                Controller();
+                mainMenu();
                 break;
         }
     }
+
+//    public void
 }
