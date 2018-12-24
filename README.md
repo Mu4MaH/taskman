@@ -20,3 +20,6 @@ Allows to manage and track tasks inside your dev team.
     * More classes are added to Data and Service layers
     * Added global storages for all projects are tracked, and all executors are in system
     * Moving business-logic to Service layer
+
+
+Deploy: java -jar taskman.jar
