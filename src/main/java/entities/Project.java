@@ -90,9 +90,4 @@ public class Project {
         executorList.remove(uid);
     }
 
-
-
-
-
-
 }

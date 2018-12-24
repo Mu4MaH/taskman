@@ -1,4 +1,4 @@
-package dao;
+package dataLayer;
 
 import entities.Executor;
 import entities.Project;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExecutorStorage {
+
     private Map<String, Executor> executors = new HashMap<>();
     
     public ExecutorStorage() {
@@ -23,7 +24,7 @@ public class ExecutorStorage {
     public void removeExecutor (String uid) {
         executors.remove(uid);
     }
-    
+    /* *** Move to DAL *** */
     public HashMap<String, Executor> getExecutorsByProject (Project project) {
         Map<String, Executor> result = new HashMap<>();
         for (String key :executors.keySet()) {
@@ -32,13 +33,13 @@ public class ExecutorStorage {
         }
         return (HashMap)result;
     }
-
     public void printExecutorsByProject (Project project) {
         for (String key :executors.keySet())
             if (executors.get(key).getTaskList().containsKey(project.getUid()))
                 System.out.println(executors.get(key).getName() + " ");
 
-        }
     }
+    /* *** *** */
+}
 
 

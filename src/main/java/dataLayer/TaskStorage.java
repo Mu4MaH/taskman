@@ -1,7 +1,7 @@
-package dao;
+package dataLayer;
 
 import entities.Task;
-import View.View;
+import view.View;
 
 import java.util.*;
 

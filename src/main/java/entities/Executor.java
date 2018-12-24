@@ -42,6 +42,16 @@ public class Executor {
         }
     }
 
+    public HashMap<String, Task> getAllTasks() {
+         Map<String,Task> output = new HashMap<>();
+        if (taskList.isEmpty()) System.out.println("No active tasks.");
+        else
+            for (String key : taskList.keySet())
+                output.put(key,taskList.get(key));
+        return (HashMap)output;
+    }
+
+
     public String getUid () {
         return this.uid;
     }

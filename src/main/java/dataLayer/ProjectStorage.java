@@ -1,4 +1,4 @@
-package dao;
+package dataLayer;
 
 import entities.Project;
 

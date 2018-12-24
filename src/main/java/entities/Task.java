@@ -1,7 +1,5 @@
 package entities;
 
-import dao.TaskStorage;
-
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -108,4 +106,5 @@ public class Task {
     enum State {
         OPEN, WORKING, FINISHED, CLOSED, open, working, finished, closed
     }
+
 }

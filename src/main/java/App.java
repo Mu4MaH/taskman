@@ -1,7 +1,7 @@
-import dao.ExecutorStorage;
-import dao.ProjectStorage;
-import dao.TaskStorage;
-import View.View;
+import dataLayer.ExecutorStorage;
+import dataLayer.ProjectStorage;
+import dataLayer.TaskStorage;
+import view.View;
 
 
 public class App {

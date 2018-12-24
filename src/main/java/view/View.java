@@ -1,17 +1,13 @@
-package View;
-
-import dao.TaskStorage;
+package view;
 
 import java.util.Scanner;
-
-import static dao.TaskStorage.tasks;
 
 public class View {
 
 
     public static void mainMenu() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("What would you like to do: \n 1)Create task \n 2)View tasklist \n 3)Change task executor \n" +
+        System.out.println("What would you like to do: \n 1)Create task \n 2)view tasklist \n 3)Change task executor \n" +
                 " 4)Change task priority \n 5)Change task time \n 6)Exit");
         Scanner taskName = new Scanner(System.in);
         switch (sc.nextInt()) {
